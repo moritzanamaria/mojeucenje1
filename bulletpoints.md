@@ -1,7 +1,5 @@
 # 📘 Little guide
 
-Popis pojmova koje sam naučila na predavanjima.
-
 ### 🕒 Što je verzioniranje koda (Version Control)?
 * **Verzioniranje koda** - Sustav koji prati povijest promjena u datotekama. Radi kao "Time Machine" za programere.
 * **Zašto ga koristimo:**
