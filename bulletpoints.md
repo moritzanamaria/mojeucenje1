@@ -8,8 +8,7 @@ Popis pojmova koje sam naučila na predavanjima.
   - **Nema straha od grešaka:** Ako napišem kod koji sve pokvari, mogu vratiti stariju verziju koja je radila.
   - **Nema duplanja mapa:** Imamo samo jednu mapu, a Git pamti sve njezine prošle verzije.
   - **Praćenje povijesti:** Točno se vidi tko je, kada i što promijenio.
- 
-  - 
+    
 ### 💻 Pokretanje File Explorera i Command Prompt-a (Windows)
 
 #### 📂 File Explorer (Žuta mapa)
