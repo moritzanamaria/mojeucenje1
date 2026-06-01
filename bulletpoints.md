@@ -28,3 +28,6 @@
 * **`git commit`** - Radi "snimku stanja" i sprema promjene na računalu.
 * **`git push`** - Šalje sve spremljene promjene s računala gore na GitHub.
 
+### Korisni resursi
+- [GitHub Docs](https://docs.github.com)
+- [Markdown vodič](https://www.markdownguide.org)
