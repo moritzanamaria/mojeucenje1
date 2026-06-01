@@ -1,7 +1,8 @@
 # 📘 Little guide
 
-### 🕒 Što je verzioniranje koda?
-* **Verzioniranje koda** - Sustav koji prati povijest promjena u datotekama. Radi kao "Time Machine" za programere.
+
+### 🕒 Što je verzioniranje koda (Version Control)?
+**Verzioniranje koda** - Sustav koji prati povijest promjena u datotekama. Radi kao "Time Machine" za programere.
 * **Zašto ga koristimo:**
   - **Nema straha od grešaka:** Ako napišem kod koji sve pokvari, mogu vratiti stariju verziju koja je radila.
   - **Nema duplanja mapa:** Imamo samo jednu mapu, a Git pamti sve njezine prošle verzije.
