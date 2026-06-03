@@ -1,0 +1,4 @@
+### Korisni resursi
+- [GitHub Docs](https://docs.github.com)
+- [Markdown vodič](https://www.markdownguide.org)
+- [30 seconds of code](https://www.30secondsofcode.org)
