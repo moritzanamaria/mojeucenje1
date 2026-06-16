@@ -1,4 +1,4 @@
-🤝 Kako doprinijeti (Contributing)
+🤝 Kako doprinijeti
 
 Ovaj projekt je otvoren za suradnju! Ako želiš dodati svoj primjer ili ispraviti grešku:
 
