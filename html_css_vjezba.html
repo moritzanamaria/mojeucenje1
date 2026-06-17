@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML & CSS – Sadržaj i Tekst</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --border: #2a3348;
+    --accent: #7c6af7;
+    --accent2: #56cfb2;
+    --accent3: #f7c46a;
+    --text: #e2e8f0;
+    --text-dim: #8892a4;
+    --code-bg: #0a0d14;
+    --tag-html: #f87171;
+    --tag-css: #60a5fa;
+    --tag-val: #a3e635;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a1040 0%, #0f1117 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--text-dim); font-size: 0.85rem; margin-top: 0.3rem; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 0.3rem;
+    padding: 1rem 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    border-radius: 4px 4px 0 0;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--bg3); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--bg3); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION TITLES ── */
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h2.group-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent2);
+  }
+
+  /* ── ELEMENT CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--tag-html);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+  .card-preview {
+    background: var(--code-bg);
+    border-radius: 6px;
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    min-height: 2rem;
+  }
+
+  /* ── CODE BLOCKS ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: var(--accent3);
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin: 0.8rem 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .kw { color: #c792ea; }
+  .tg { color: var(--tag-html); }
+  .at { color: #82aaff; }
+  .vl { color: var(--tag-val); }
+  .cm { color: #546e7a; font-style: italic; }
+  .pr { color: var(--tag-css); }
+  .pv { color: var(--accent3); }
+
+  /* ── CSS PLAYGROUND ── */
+  .playground {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .playground-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dim);
+  }
+  .playground-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 180px;
+  }
+  @media(max-width:600px){ .playground-body { grid-template-columns: 1fr; } }
+  .playground-code {
+    border-right: 1px solid var(--border);
+    padding: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: var(--code-bg);
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .playground-result {
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .pg-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── CSS INTERACTIVE ── */
+  .css-demo-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .css-demo-box .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .ctrl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .ctrl-group label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ctrl-group select,
+  .ctrl-group input[type=range],
+  .ctrl-group input[type=color] {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .ctrl-group input[type=color] {
+    padding: 0.1rem;
+    width: 50px;
+    height: 28px;
+  }
+  .demo-text {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 1.2rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    border: 1px solid var(--border);
+  }
+  .live-css {
+    margin-top: 0.7rem;
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent2);
+    background: var(--code-bg);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── PROP LIST ── */
+  .prop-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 1.2rem;
+  }
+  .prop-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.25em 0.6em;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    background: var(--bg3);
+    color: var(--text-dim);
+    border-color: var(--border);
+  }
+  .prop-badge:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .prop-badge.css { color: var(--tag-css); border-color: #2563eb44; }
+  .prop-badge.css:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+
+  /* ── QUIZ ── */
+  .quiz-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .quiz-q {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .quiz-opt {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s;
+  }
+  .quiz-opt:hover { border-color: var(--accent); color: var(--accent); }
+  .quiz-opt.correct { border-color: var(--accent2) !important; background: #0d3328; color: var(--accent2); }
+  .quiz-opt.wrong { border-color: #f87171 !important; background: #2d1212; color: #f87171; }
+  .quiz-fb {
+    font-size: 0.82rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    display: none;
+  }
+  .quiz-fb.show { display: block; }
+  .quiz-fb.ok { background: #0d3328; color: var(--accent2); }
+  .quiz-fb.fail { background: #2d1212; color: #f87171; }
+  .quiz-score {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+  }
+
+  /* ── CHEATSHEET ── */
+  .cheat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-bottom: 1.5rem;
+  }
+  .cheat-table th {
+    background: var(--bg3);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+  .cheat-table td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #1e2535;
+    vertical-align: top;
+  }
+  .cheat-table tr:hover td { background: var(--bg3); }
+  .cheat-table td:first-child { font-family: 'JetBrains Mono', monospace; color: var(--tag-html); font-weight: 600; }
+  .cheat-table td:nth-child(2) { color: var(--text-dim); }
+  .cheat-table td:nth-child(3) { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent3); }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--bg3);
+    border-radius: 99px;
+    height: 6px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 99px;
+    transition: width 0.4s;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HTML &amp; CSS <span>1/5</span> — Sadržaj i Tekst</h1>
+  <p>Interaktivna stranica za vježbanje · Edunova Frontend Developer</p>
+</header>
+
+<!-- TABS -->
+<div class="tabs" id="tabs">
+  <button class="tab-btn active" onclick="switchTab('html-elementi')">🏷️ HTML Elementi</button>
+  <button class="tab-btn" onclick="switchTab('css-font')">🔤 CSS Font</button>
+  <button class="tab-btn" onclick="switchTab('css-text')">📝 CSS Text</button>
+  <button class="tab-btn" onclick="switchTab('css-smjer')">↔️ Smjer</button>
+  <button class="tab-btn" onclick="switchTab('playground')">🧪 Playground</button>
+  <button class="tab-btn" onclick="switchTab('cheatsheet')">📋 Cheatsheet</button>
+  <button class="tab-btn" onclick="switchTab('kviz')">🎯 Kviz</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 1: HTML ELEMENTI
+══════════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-html-elementi">
+<div class="container">
+
+  <p class="section-label">HTML Elementi</p>
+
+  <h2 class="group-title">Osnovna struktura dokumenta</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;html&gt;</div>
+      <div class="card-desc">Korijen cijelog HTML dokumenta. Sve ide unutar.</div>
+      <div class="card-preview"><code>&lt;html lang="hr"&gt; ... &lt;/html&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;head&gt;</div>
+      <div class="card-desc">Meta-informacije, title, linkovi na CSS, skripte. Nije vidljivo u browseru.</div>
+      <div class="card-preview"><code>&lt;head&gt;&lt;title&gt;Moja stranica&lt;/title&gt;&lt;/head&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;body&gt;</div>
+      <div class="card-desc">Sav vidljivi sadržaj stranice.</div>
+      <div class="card-preview"><code>&lt;body&gt; ... sav sadržaj ... &lt;/body&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;title&gt;</div>
+      <div class="card-desc">Naslov u browser tabu i bookmarkovima.</div>
+      <div class="card-preview"><code>&lt;title&gt;Moja web stranica&lt;/title&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;meta&gt;</div>
+      <div class="card-desc">Metadata: charset, viewport, opis za SEO. Samozatvarajući tag.</div>
+      <div class="card-preview"><code>&lt;meta charset="UTF-8"&gt;<br>&lt;meta name="description" content="..."&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;link&gt;</div>
+      <div class="card-desc">Povezuje vanjski CSS ili fontove.</div>
+      <div class="card-preview"><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;style&gt;</div>
+      <div class="card-desc">CSS direktno unutar HTML dokumenta (u &lt;head&gt;).</div>
+      <div class="card-preview"><code>&lt;style&gt; p { color: red; } &lt;/style&gt;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;script&gt;</div>
+      <div class="card-desc">JavaScript kod ili link na JS datoteku.</div>
+      <div class="card-preview"><code>&lt;script src="app.js"&gt;&lt;/script&gt;</code></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Naslovi, paragrafi i kontejneri</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;h1&gt; — &lt;h6&gt;</div>
+      <div class="card-desc">Naslovi. h1 = najvažniji, h6 = najmanji. Hijerarhija sadržaja.</div>
+      <div class="card-preview">
+        <h1 style="font-size:1.4rem;line-height:1.2">h1 Naslov</h1>
+        <h2 style="font-size:1.1rem;line-height:1.2">h2 Podnaslov</h2>
+        <h3 style="font-size:0.95rem;line-height:1.2">h3 Manji</h3>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;p&gt;</div>
+      <div class="card-desc">Paragraf teksta. Block-level element.</div>
+      <div class="card-preview"><p>Ovo je paragraf. Ima gornji i donji margin.</p></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;div&gt;</div>
+      <div class="card-desc">Generički block-level kontejner. Nema semantičkog značenja.</div>
+      <div class="card-preview"><div style="border:1px dashed #7c6af7;padding:6px;border-radius:4px">div kontejner</div></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;span&gt;</div>
+      <div class="card-desc">Inline kontejner. Koristi se za stiliziranje dijela teksta.</div>
+      <div class="card-preview">Tekst s <span style="color:#f7c46a;font-weight:700">naglašenim dijelom</span> unutra.</div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Razdjelnici i linkovi</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;br&gt;</div>
+      <div class="card-desc">Prijelom retka. Samozatvarajući. Koristi umjereno.</div>
+      <div class="card-preview">Prva linija<br>Druga linija</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;hr&gt;</div>
+      <div class="card-desc">Horizontalna linija — tematski razdjel.</div>
+      <div class="card-preview"><hr style="border-color:#7c6af7;opacity:0.5"></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;a&gt;</div>
+      <div class="card-desc">Hyperlink. Atribut <code>href</code> = odredište. <code>target="_blank"</code> = novi tab.</div>
+      <div class="card-preview"><a href="#" style="color:#7c6af7">Ovo je link</a> i <a href="#" target="_blank" style="color:#56cfb2">ovaj otvara novi tab</a></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Formatiranje teksta</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;strong&gt; / &lt;b&gt;</div>
+      <div class="card-desc"><strong>strong</strong> = semantički važan. <b>b</b> = vizualno podebljano bez semantike.</div>
+      <div class="card-preview"><strong>Ovo je strong</strong> — <b>ovo je b</b></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;em&gt; / &lt;i&gt;</div>
+      <div class="card-desc"><em>em</em> = naglasak. <i>i</i> = vizualna kurziva.</div>
+      <div class="card-preview"><em>Ovo je em</em> — <i>ovo je i</i></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;u&gt;</div>
+      <div class="card-desc">Podcrtano. Pazi — može izgledati kao link!</div>
+      <div class="card-preview"><u>Podcrtani tekst</u></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;s&gt;</div>
+      <div class="card-desc">Prekriženi tekst — za zastarjele ili pogrešne informacije.</div>
+      <div class="card-preview"><s>Stara cijena: 100€</s> Nova: 79€</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;small&gt;</div>
+      <div class="card-desc">Sitni tisak — napomene, copyright, uvjeti.</div>
+      <div class="card-preview">Cijena: 99€ <small>(PDV uključen)</small></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;sub&gt; / &lt;sup&gt;</div>
+      <div class="card-desc">Indeks i eksponent.</div>
+      <div class="card-preview">H<sub>2</sub>O — E=mc<sup>2</sup></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Kod i preformatirani tekst</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;pre&gt;</div>
+      <div class="card-desc">Čuva razmake i prijelome. Monospace font. Za ASCII art, kod s uvlakama.</div>
+      <div class="card-preview"><pre style="font-size:0.75rem;background:transparent;border:none;padding:0">  ┌──────┐
+  │ kod  │
+  └──────┘</pre></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;code&gt;</div>
+      <div class="card-desc">Inline dio koda.</div>
+      <div class="card-preview">Koristi <code>console.log()</code> za debug.</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;kbd&gt;</div>
+      <div class="card-desc">Tipkovnički unos — prikazuje što korisnik treba pritisnuti.</div>
+      <div class="card-preview">Pritisni <kbd style="background:#2a3348;padding:2px 6px;border-radius:3px;border:1px solid #4a5568">Ctrl</kbd> + <kbd style="background:#2a3348;padding:2px 6px;border-radius:3px;border:1px solid #4a5568">S</kbd></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;samp&gt;</div>
+      <div class="card-desc">Izlaz programa ili računala.</div>
+      <div class="card-preview">Error: <samp style="color:#f87171">File not found</samp></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;var&gt;</div>
+      <div class="card-desc">Matematička ili programska varijabla.</div>
+      <div class="card-preview">Varijabla <var style="font-style:italic;color:#a3e635">x</var> = 42</div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Semantika i anotacije</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;abbr&gt;</div>
+      <div class="card-desc">Kratica. Atribut <code>title</code> pokazuje puno ime na hover.</div>
+      <div class="card-preview"><abbr title="Hypertext Markup Language" style="text-decoration:underline dotted">HTML</abbr> je jezik za web.</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;dfn&gt;</div>
+      <div class="card-desc">Definicija termina — gdje se termin prvi puta definira.</div>
+      <div class="card-preview"><dfn style="font-style:italic">CSS</dfn> — Cascading Style Sheets.</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;time&gt;</div>
+      <div class="card-desc">Čitljivo za strojeve. Atribut <code>datetime</code> za ISO format.</div>
+      <div class="card-preview"><time datetime="2024-01-01">1. siječnja 2024.</time></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;mark&gt;</div>
+      <div class="card-desc">Označeni/istaknuti tekst (kao žuti marker).</div>
+      <div class="card-preview">Pretraži: rezultati s <mark style="background:#f7c46a;color:#000;padding:0 2px">traže nom riječju</mark> su istaknuti.</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;data&gt;</div>
+      <div class="card-desc">Strojno čitljiva vrijednost uz prikazani tekst.</div>
+      <div class="card-preview"><data value="1234">Proizvod A</data></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Napredniji elementi</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag">&lt;bdi&gt;</div>
+      <div class="card-desc">Izolira dio teksta koji može imati drugi smjer pisanja.</div>
+      <div class="card-preview">Korisnik: <bdi>مرحبا</bdi> — siguran prikaz RTL teksta.</div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;bdo&gt;</div>
+      <div class="card-desc">Prisilno mijenja smjer teksta. <code>dir="rtl"</code> ili <code>ltr"</code>.</div>
+      <div class="card-preview"><bdo dir="rtl">Ovo je obrnuto</bdo></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;ruby&gt; / &lt;rt&gt; / &lt;rp&gt;</div>
+      <div class="card-desc">Furigana notacija za azijska pisma.</div>
+      <div class="card-preview"><ruby>漢<rt>kan</rt>字<rt>ji</rt></ruby></div>
+    </div>
+    <div class="card">
+      <div class="card-tag">&lt;wbr&gt;</div>
+      <div class="card-desc">Prijedlog za prijelom dugih riječi (Word Break Opportunity).</div>
+      <div class="card-preview">Super<wbr>dugačka<wbr>Nemoguće<wbr>PrelomitaRiječ</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2: CSS FONT
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-css-font">
+<div class="container">
+
+  <p class="section-label">CSS Tipografija — Font</p>
+
+  <!-- Interactive font demo -->
+  <div class="css-demo-box">
+    <div style="font-weight:600;margin-bottom:1rem;font-size:0.9rem">🎮 Interaktivni Font Demo</div>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>font-family</label>
+        <select id="ff" onchange="updateFontDemo()">
+          <option value="sans-serif">sans-serif</option>
+          <option value="serif">serif</option>
+          <option value="monospace">monospace</option>
+          <option value="cursive">cursive</option>
+          <option value="'Georgia', serif">Georgia</option>
+          <option value="'Arial', sans-serif">Arial</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>font-size</label>
+        <input type="range" id="fs" min="10" max="48" value="20" oninput="updateFontDemo()">
+        <span id="fs-val" style="font-size:0.7rem;color:var(--accent2)">20px</span>
+      </div>
+      <div class="ctrl-group">
+        <label>font-weight</label>
+        <select id="fw" onchange="updateFontDemo()">
+          <option value="300">300 — Light</option>
+          <option value="400" selected>400 — Regular</option>
+          <option value="600">600 — SemiBold</option>
+          <option value="700">700 — Bold</option>
+          <option value="900">900 — Black</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>font-style</label>
+        <select id="fst" onchange="updateFontDemo()">
+          <option value="normal">normal</option>
+          <option value="italic">italic</option>
+          <option value="oblique">oblique</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>font-variant</label>
+        <select id="fv" onchange="updateFontDemo()">
+          <option value="normal">normal</option>
+          <option value="small-caps">small-caps</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>color</label>
+        <input type="color" id="fc" value="#e2e8f0" oninput="updateFontDemo()">
+      </div>
+    </div>
+    <div class="demo-text" id="font-demo">Ovo je primjer teksta — vidi kako se mijenja!</div>
+    <div class="live-css" id="font-live-css">/* live CSS */</div>
+  </div>
+
+  <h2 class="group-title">Sva font-* svojstva</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font</div>
+      <div class="card-desc">Shorthand za sve font vrijednosti u jednoj liniji.</div>
+      <div class="card-preview"><code>font: italic bold 18px/1.5 Arial, sans-serif;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-family</div>
+      <div class="card-desc">Font koji se koristi. Navodi se fallback lista.</div>
+      <div class="card-preview"><code>font-family: 'Inter', Arial, sans-serif;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-size</div>
+      <div class="card-desc">Veličina fonta: px, rem, em, %, vw…</div>
+      <div class="card-preview">
+        <span style="font-size:12px">12px</span> ·
+        <span style="font-size:16px">16px</span> ·
+        <span style="font-size:24px">24px</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-weight</div>
+      <div class="card-desc">Debljina fonta: 100–900 ili thin/bold/…</div>
+      <div class="card-preview">
+        <div style="font-weight:300">300 Light</div>
+        <div style="font-weight:400">400 Normal</div>
+        <div style="font-weight:700">700 Bold</div>
+        <div style="font-weight:900">900 Black</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-style</div>
+      <div class="card-desc">normal | italic | oblique</div>
+      <div class="card-preview">
+        <div style="font-style:normal">normal</div>
+        <div style="font-style:italic">italic</div>
+        <div style="font-style:oblique">oblique</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-variant</div>
+      <div class="card-desc">normal | small-caps — slova se prikazuju kao mala ali verzalom.</div>
+      <div class="card-preview">
+        <div>normal text</div>
+        <div style="font-variant:small-caps">small-caps tekst</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-kerning</div>
+      <div class="card-desc">auto | normal | none — razmak između slova baziran na kerning tablicama.</div>
+      <div class="card-preview"><code>font-kerning: normal;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-stretch</div>
+      <div class="card-desc">Suženi ili prošireni font (ako ga font podržava).</div>
+      <div class="card-preview"><code>font-stretch: condensed | expanded | normal</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-size-adjust</div>
+      <div class="card-desc">Čuva čitljivost kod fallback fontova prilagođavanjem x-height.</div>
+      <div class="card-preview"><code>font-size-adjust: 0.5;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-synthesis</div>
+      <div class="card-desc">Kontrolira smije li browser "lažno" kreirati bold/italic ako font nema te rezove.</div>
+      <div class="card-preview"><code>font-synthesis: none;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-optical-sizing</div>
+      <div class="card-desc">auto | none — optimizira oblik slova za veličinu.</div>
+      <div class="card-preview"><code>font-optical-sizing: auto;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-variation-settings</div>
+      <div class="card-desc">Niska razina kontrole varijabilnih fontova (wght, wdth, ital…).</div>
+      <div class="card-preview"><code>font-variation-settings: "wght" 650;</code></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">font-variant-* obitelj</h2>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:1rem">Napredna kontrola tipografskih varijanti.</p>
+  <div class="prop-list">
+    <span class="prop-badge css">font-variant-caps</span>
+    <span class="prop-badge css">font-variant-numeric</span>
+    <span class="prop-badge css">font-variant-ligatures</span>
+    <span class="prop-badge css">font-variant-alternates</span>
+    <span class="prop-badge css">font-variant-east-asian</span>
+    <span class="prop-badge css">font-variant-emoji</span>
+    <span class="prop-badge css">font-variant-position</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-variant-numeric</div>
+      <div class="card-desc">Kontrola izgleda brojeva: oldstyle, lining, slashed-zero…</div>
+      <div class="card-preview"><code>font-variant-numeric: oldstyle-nums slashed-zero;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-variant-ligatures</div>
+      <div class="card-desc">Spajanje slova (fi, fl…). common-ligatures | no-common-ligatures.</div>
+      <div class="card-preview"><code>font-variant-ligatures: common-ligatures;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">font-palette</div>
+      <div class="card-desc">Boje za colour fontove (emoji, colour SVG fontove).</div>
+      <div class="card-preview"><code>font-palette: normal | dark | light</code></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3: CSS TEXT
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-css-text">
+<div class="container">
+
+  <p class="section-label">CSS Tipografija — Text</p>
+
+  <!-- Interactive text demo -->
+  <div class="css-demo-box">
+    <div style="font-weight:600;margin-bottom:1rem;font-size:0.9rem">🎮 Interaktivni Text Demo</div>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>text-align</label>
+        <select id="ta" onchange="updateTextDemo()">
+          <option value="left">left</option>
+          <option value="center">center</option>
+          <option value="right">right</option>
+          <option value="justify">justify</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>text-transform</label>
+        <select id="tt" onchange="updateTextDemo()">
+          <option value="none">none</option>
+          <option value="uppercase">uppercase</option>
+          <option value="lowercase">lowercase</option>
+          <option value="capitalize">capitalize</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>text-decoration</label>
+        <select id="td" onchange="updateTextDemo()">
+          <option value="none">none</option>
+          <option value="underline">underline</option>
+          <option value="overline">overline</option>
+          <option value="line-through">line-through</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>letter-spacing</label>
+        <input type="range" id="ls" min="-2" max="10" value="0" step="0.5" oninput="updateTextDemo()">
+        <span id="ls-val" style="font-size:0.7rem;color:var(--accent2)">0px</span>
+      </div>
+      <div class="ctrl-group">
+        <label>line-height</label>
+        <input type="range" id="lh" min="0.8" max="3" value="1.6" step="0.1" oninput="updateTextDemo()">
+        <span id="lh-val" style="font-size:0.7rem;color:var(--accent2)">1.6</span>
+      </div>
+      <div class="ctrl-group">
+        <label>text-shadow</label>
+        <select id="ts" onchange="updateTextDemo()">
+          <option value="none">none</option>
+          <option value="2px 2px 4px rgba(124,106,247,0.8)">purple glow</option>
+          <option value="0 0 10px #56cfb2">cyan glow</option>
+          <option value="3px 3px 0 #f7c46a">hard shadow</option>
+        </select>
+      </div>
+    </div>
+    <div class="demo-text" id="text-demo" style="flex-direction:column;align-items:stretch;font-size:1rem">
+      Ovo je primjer teksta za demonstraciju text CSS svojstava. Mijenjaj kontrole iznad i vidi efekte!
+    </div>
+    <div class="live-css" id="text-live-css">/* live CSS */</div>
+  </div>
+
+  <h2 class="group-title">Poravnanje i uvlačenje</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-align</div>
+      <div class="card-desc">left | right | center | justify</div>
+      <div class="card-preview">
+        <div style="text-align:left;border-bottom:1px solid #2a3348;padding:3px 0;font-size:0.8rem">← left</div>
+        <div style="text-align:center;border-bottom:1px solid #2a3348;padding:3px 0;font-size:0.8rem">center →←</div>
+        <div style="text-align:right;font-size:0.8rem;padding-top:3px">right →</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-align-last</div>
+      <div class="card-desc">Poravnanje zadnjeg retka u justify bloku.</div>
+      <div class="card-preview"><code>text-align-last: center;</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-indent</div>
+      <div class="card-desc">Uvlačenje prvog retka paragrafa.</div>
+      <div class="card-preview"><p style="text-indent:2em;margin:0;font-size:0.82rem">Ovo je paragraf s text-indent: 2em — prvi redak je uvučen.</p></div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Dekoracija teksta</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-decoration</div>
+      <div class="card-desc">Shorthand za underline, overline, line-through.</div>
+      <div class="card-preview">
+        <div style="text-decoration:underline">underline</div>
+        <div style="text-decoration:overline">overline</div>
+        <div style="text-decoration:line-through">line-through</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-decoration-color</div>
+      <div class="card-desc">Boja linije dekoracije.</div>
+      <div class="card-preview"><span style="text-decoration:underline;text-decoration-color:#f7c46a">žuta podcrta</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-decoration-style</div>
+      <div class="card-desc">solid | double | dotted | dashed | wavy</div>
+      <div class="card-preview">
+        <div style="text-decoration:underline;text-decoration-style:wavy;text-decoration-color:#f87171;font-size:0.9rem">wavy underline</div>
+        <div style="text-decoration:underline;text-decoration-style:dashed;margin-top:4px;font-size:0.9rem">dashed underline</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-shadow</div>
+      <div class="card-desc"><code>x y blur color</code> — može se naslagati više sjenki.</div>
+      <div class="card-preview">
+        <div style="text-shadow:0 0 8px #7c6af7;font-size:1.1rem;font-weight:700">Glow efekt</div>
+        <div style="text-shadow:2px 2px 0 #f7c46a;font-size:1.1rem;font-weight:700;margin-top:4px">Hard shadow</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Transformacija i prekoračenje</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-transform</div>
+      <div class="card-desc">Mijenja pisanje slova bez promjene HTML-a.</div>
+      <div class="card-preview">
+        <div style="text-transform:uppercase">uppercase</div>
+        <div style="text-transform:lowercase">LOWERCASE</div>
+        <div style="text-transform:capitalize">capitalize svaku Riječ</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-overflow</div>
+      <div class="card-desc">Što se prikazuje kad tekst prekorači kontejner: clip | ellipsis.</div>
+      <div class="card-preview">
+        <div style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:100%;font-size:0.82rem">
+          Ovo je jako dugačak tekst koji ne stane u kontejner...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Razmaci i prijelomi</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">letter-spacing</div>
+      <div class="card-desc">Razmak između slova (tracking).</div>
+      <div class="card-preview">
+        <div style="letter-spacing:-1px">-1px Jako zbijeno</div>
+        <div style="letter-spacing:2px">+2px Rašireno</div>
+        <div style="letter-spacing:5px">+5px Razdvojeno</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">word-spacing</div>
+      <div class="card-desc">Razmak između riječi.</div>
+      <div class="card-preview">
+        <div>normalan razmak između riječi</div>
+        <div style="word-spacing:12px">povećan razmak između</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">line-height</div>
+      <div class="card-desc">Visina retka. Preporučeno 1.4–1.8 za čitljivost.</div>
+      <div class="card-preview">
+        <div style="line-height:1;font-size:0.78rem;margin-bottom:8px">line-height:1 — Jako<br>zbijen tekst je<br>teže čitati.</div>
+        <div style="line-height:2;font-size:0.78rem">line-height:2 — Opušten<br>tekst s više<br>disanja.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">white-space</div>
+      <div class="card-desc">Kako se tretiraju razmaci i prijelomi.</div>
+      <div class="card-preview">
+        <div style="font-size:0.78rem"><code>normal</code> — skuplja višestruke razmake</div>
+        <div style="font-size:0.78rem;margin-top:4px"><code>nowrap</code> — ne prelama</div>
+        <div style="font-size:0.78rem;margin-top:4px"><code>pre</code> — čuva sve razmake</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">word-break</div>
+      <div class="card-desc">Gdje se prekida dugačka riječ: normal | break-all | keep-all.</div>
+      <div class="card-preview">
+        <div style="word-break:break-all;font-size:0.78rem;width:150px">Superdugačka-Nemoguće-Prekinuti-Riječica</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">hyphens</div>
+      <div class="card-desc">Automatska crtičica (silabifikacija): none | manual | auto.</div>
+      <div class="card-preview"><code>hyphens: auto;</code><br><code>lang="hr"</code> potreban na elementu.</div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Emphasis i napredno</h2>
+  <div class="prop-list">
+    <span class="prop-badge css">text-emphasis</span>
+    <span class="prop-badge css">text-emphasis-color</span>
+    <span class="prop-badge css">text-emphasis-style</span>
+    <span class="prop-badge css">text-emphasis-position</span>
+    <span class="prop-badge css">text-orientation</span>
+    <span class="prop-badge css">text-rendering</span>
+    <span class="prop-badge css">text-underline-offset</span>
+    <span class="prop-badge css">text-underline-position</span>
+    <span class="prop-badge css">text-justify</span>
+    <span class="prop-badge css">hanging-punctuation</span>
+    <span class="prop-badge css">initial-letter</span>
+    <span class="prop-badge css">text-wrap</span>
+    <span class="prop-badge css">text-wrap-mode</span>
+    <span class="prop-badge css">text-wrap-style</span>
+    <span class="prop-badge css">text-box</span>
+    <span class="prop-badge css">text-autospace</span>
+    <span class="prop-badge css">hyphenate-character</span>
+    <span class="prop-badge css">hyphenate-limit-chars</span>
+    <span class="prop-badge css">line-break</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-emphasis</div>
+      <div class="card-desc">Oznake iznad/ispod slova (dot, circle…). Često u azijskoj tipografiji.</div>
+      <div class="card-preview"><span style="text-emphasis:circle red;-webkit-text-emphasis:circle red">naglašen tekst</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">initial-letter</div>
+      <div class="card-desc">Uvećano prvo slovo paragrafa (drop cap).</div>
+      <div class="card-preview"><code>p::first-letter { initial-letter: 3; }</code></div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">text-rendering</div>
+      <div class="card-desc">Hinti renderer: optimizeSpeed | optimizeLegibility | geometricPrecision.</div>
+      <div class="card-preview"><code>text-rendering: optimizeLegibility;</code></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4: CSS SMJER
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-css-smjer">
+<div class="container">
+
+  <p class="section-label">CSS Smjer pisanja</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">direction</div>
+      <div class="card-desc">Smjer toka teksta: <code>ltr</code> (lijevo→desno) ili <code>rtl</code> (desno→lijevo).</div>
+      <div class="card-preview">
+        <div style="direction:ltr;border-bottom:1px solid #2a3348;padding:4px 0;font-size:0.82rem">LTR: Ovo ide lijevo → desno</div>
+        <div style="direction:rtl;padding-top:4px;font-size:0.82rem">RTL: مرحبا بالعالم</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">unicode-bidi</div>
+      <div class="card-desc">Kontrolira bi-direktionalni algoritam. Radi zajedno s <code>direction</code>.</div>
+      <div class="card-preview">
+        <div style="font-size:0.8rem"><code>normal</code> — browser odlučuje</div>
+        <div style="font-size:0.8rem;margin-top:4px"><code>embed</code> — otvara novi bidi level</div>
+        <div style="font-size:0.8rem;margin-top:4px"><code>bidi-override</code> — prisilan smjer</div>
+        <div style="font-size:0.8rem;margin-top:4px"><code>isolate</code> — kao &lt;bdi&gt;</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-tag" style="color:var(--tag-css)">writing-mode</div>
+      <div class="card-desc">Smjer toka blokova teksta. Vertikalni tekst za japanski/kineski.</div>
+      <div class="card-preview" style="display:flex;gap:1rem;align-items:flex-start;min-height:80px">
+        <div style="font-size:0.75rem;text-align:center">
+          <div style="writing-mode:horizontal-tb">Horizontalan<br>tekst</div>
+          <div style="color:var(--text-dim);font-size:0.65rem;margin-top:4px">horizontal-tb</div>
+        </div>
+        <div style="font-size:0.75rem;text-align:center">
+          <div style="writing-mode:vertical-rl;height:70px">Vertikalan</div>
+          <div style="color:var(--text-dim);font-size:0.65rem;margin-top:4px">vertical-rl</div>
+        </div>
+        <div style="font-size:0.75rem;text-align:center">
+          <div style="writing-mode:vertical-lr;height:70px">Lijevo</div>
+          <div style="color:var(--text-dim);font-size:0.65rem;margin-top:4px">vertical-lr</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="group-title">Vizualni primjeri</h2>
+
+  <div class="playground">
+    <div class="playground-header">
+      <span>📝 Kod</span><span>👁 Rezultat</span>
+    </div>
+    <div class="playground-body">
+      <div class="playground-code"><span class="pr">p</span> {
+  <span class="pr">direction</span>: <span class="pv">rtl</span>;
+  <span class="pr">unicode-bidi</span>: <span class="pv">embed</span>;
+}
+
+<span class="cm">/* Arapski, hebrejski,
+   perzijski tekst ↑ */</span></div>
+      <div class="playground-result">
+        <div class="pg-label">RTL tekst</div>
+        <p style="direction:rtl;font-size:1.1rem">مرحبا بالعالم</p>
+        <p style="direction:rtl;font-size:0.85rem;color:var(--text-dim)">שלום עולם</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="playground">
+    <div class="playground-header">
+      <span>📝 Kod</span><span>👁 Rezultat</span>
+    </div>
+    <div class="playground-body">
+      <div class="playground-code"><span class="pr">h2</span> {
+  <span class="pr">writing-mode</span>: <span class="pv">vertical-rl</span>;
+  <span class="pr">text-orientation</span>: <span class="pv">mixed</span>;
+  <span class="pr">letter-spacing</span>: <span class="pv">4px</span>;
+}
+
+<span class="cm">/* Vertikalni naslovi za
+   bočne label-e */</span></div>
+      <div class="playground-result">
+        <div class="pg-label">writing-mode demo</div>
+        <div style="display:flex;gap:16px;align-items:center">
+          <div style="writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:4px;font-weight:700;color:var(--accent);font-size:1rem">NASLOV</div>
+          <div style="font-size:0.82rem;color:var(--text-dim);max-width:100px">Tekst koji ide pored vertikalnog naslova...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-top:1rem">
+    <div style="font-weight:600;margin-bottom:0.8rem;font-size:0.9rem">💡 Kada se koriste?</div>
+    <div style="font-size:0.85rem;color:var(--text-dim);display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+      <div><strong style="color:var(--text)">direction: rtl</strong><br>Arapski, hebrejski, perzijski, urdu jezici.</div>
+      <div><strong style="color:var(--text)">writing-mode: vertical</strong><br>Japanski, kineski, korejski — vertikalni tekst.</div>
+      <div><strong style="color:var(--text)">unicode-bidi: isolate</strong><br>Miješanje LTR/RTL unutar iste rečenice.</div>
+      <div><strong style="color:var(--text)">text-orientation</strong><br>Kako se glyph okreću u vertical writing-mode.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5: PLAYGROUND
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-playground">
+<div class="container">
+
+  <p class="section-label">Slobodni Playground</p>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:1.5rem">Piši HTML i CSS direktno i vidi rezultat uživo.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+    <div>
+      <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;align-items:center">
+        <span style="font-size:0.72rem;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase">HTML</span>
+      </div>
+      <textarea id="pg-html" rows="12" style="width:100%;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.78rem;padding:0.8rem;resize:vertical;line-height:1.6" oninput="runPlayground()">&lt;div class="demo"&gt;
+  &lt;h2&gt;Moj naslov&lt;/h2&gt;
+  &lt;p&gt;Ovo je &lt;strong&gt;bold&lt;/strong&gt; i 
+  &lt;em&gt;italic&lt;/em&gt; tekst.&lt;/p&gt;
+  &lt;p&gt;Pogledaj &lt;mark&gt;označeni&lt;/mark&gt; tekst.&lt;/p&gt;
+  &lt;code&gt;console.log("hello")&lt;/code&gt;
+&lt;/div&gt;</textarea>
+    </div>
+    <div>
+      <div style="font-size:0.72rem;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.5rem">CSS</div>
+      <textarea id="pg-css" rows="12" style="width:100%;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.78rem;padding:0.8rem;resize:vertical;line-height:1.6" oninput="runPlayground()">.demo {
+  font-family: Georgia, serif;
+  color: #e2e8f0;
+  line-height: 1.8;
+  padding: 1rem;
+}
+.demo h2 {
+  color: #7c6af7;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+}
+.demo mark {
+  background: #f7c46a;
+  color: #000;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+.demo code {
+  background: #1e2535;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #a3e635;
+}</textarea>
+    </div>
+  </div>
+  <div style="font-size:0.72rem;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.5rem">REZULTAT</div>
+  <iframe id="pg-output" style="width:100%;height:250px;border:1px solid var(--border);border-radius:8px;background:#fff"></iframe>
+
+  <h2 class="group-title" style="margin-top:2rem">Brzi primjeri — klikni za učitavanje</h2>
+  <div class="prop-list" style="margin-bottom:1rem">
+    <button class="prop-badge" onclick="loadSnippet('headings')">Naslovi h1-h6</button>
+    <button class="prop-badge" onclick="loadSnippet('text-deco')">Text dekoracija</button>
+    <button class="prop-badge" onclick="loadSnippet('bidi')">RTL tekst</button>
+    <button class="prop-badge" onclick="loadSnippet('code-block')">Kod elementi</button>
+    <button class="prop-badge" onclick="loadSnippet('semantic')">Semantički</button>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 6: CHEATSHEET
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-cheatsheet">
+<div class="container">
+
+  <p class="section-label">Brza referenca</p>
+
+  <h2 class="group-title">HTML Elementi — Tekst</h2>
+  <table class="cheat-table">
+    <tr><th>Tag</th><th>Opis</th><th>Primjer</th></tr>
+    <tr><td>&lt;h1&gt;–&lt;h6&gt;</td><td>Naslovi po hijerarhiji</td><td>&lt;h1&gt;Naslov&lt;/h1&gt;</td></tr>
+    <tr><td>&lt;p&gt;</td><td>Paragraf</td><td>&lt;p&gt;Tekst&lt;/p&gt;</td></tr>
+    <tr><td>&lt;div&gt;</td><td>Block kontejner</td><td>&lt;div class="box"&gt;...&lt;/div&gt;</td></tr>
+    <tr><td>&lt;span&gt;</td><td>Inline kontejner</td><td>&lt;span style="color:red"&gt;...&lt;/span&gt;</td></tr>
+    <tr><td>&lt;strong&gt;</td><td>Semantički važan (bold)</td><td>&lt;strong&gt;Važno!&lt;/strong&gt;</td></tr>
+    <tr><td>&lt;em&gt;</td><td>Naglasak (italic)</td><td>&lt;em&gt;naglasak&lt;/em&gt;</td></tr>
+    <tr><td>&lt;b&gt;</td><td>Vizualno bold</td><td>&lt;b&gt;bold&lt;/b&gt;</td></tr>
+    <tr><td>&lt;i&gt;</td><td>Vizualno italic</td><td>&lt;i&gt;italic&lt;/i&gt;</td></tr>
+    <tr><td>&lt;u&gt;</td><td>Podcrtano</td><td>&lt;u&gt;podcrtano&lt;/u&gt;</td></tr>
+    <tr><td>&lt;s&gt;</td><td>Prekriženo</td><td>&lt;s&gt;staro&lt;/s&gt;</td></tr>
+    <tr><td>&lt;small&gt;</td><td>Sitni tekst</td><td>&lt;small&gt;napomena&lt;/small&gt;</td></tr>
+    <tr><td>&lt;sub&gt;</td><td>Indeks</td><td>H&lt;sub&gt;2&lt;/sub&gt;O</td></tr>
+    <tr><td>&lt;sup&gt;</td><td>Eksponent</td><td>E=mc&lt;sup&gt;2&lt;/sup&gt;</td></tr>
+    <tr><td>&lt;mark&gt;</td><td>Highlighted tekst</td><td>&lt;mark&gt;istaknut&lt;/mark&gt;</td></tr>
+    <tr><td>&lt;abbr&gt;</td><td>Kratica</td><td>&lt;abbr title="HyperText"&gt;HTML&lt;/abbr&gt;</td></tr>
+    <tr><td>&lt;time&gt;</td><td>Datum/vrijeme</td><td>&lt;time datetime="2024-01-01"&gt;1.1.&lt;/time&gt;</td></tr>
+    <tr><td>&lt;code&gt;</td><td>Inline kod</td><td>&lt;code&gt;console.log()&lt;/code&gt;</td></tr>
+    <tr><td>&lt;pre&gt;</td><td>Preformatirani blok</td><td>&lt;pre&gt;  uvučen tekst&lt;/pre&gt;</td></tr>
+    <tr><td>&lt;kbd&gt;</td><td>Tipkovnički unos</td><td>&lt;kbd&gt;Ctrl+S&lt;/kbd&gt;</td></tr>
+    <tr><td>&lt;samp&gt;</td><td>Izlaz programa</td><td>&lt;samp&gt;Error: 404&lt;/samp&gt;</td></tr>
+    <tr><td>&lt;var&gt;</td><td>Varijabla</td><td>&lt;var&gt;x&lt;/var&gt; = 42</td></tr>
+    <tr><td>&lt;br&gt;</td><td>Prijelom retka</td><td>redak1&lt;br&gt;redak2</td></tr>
+    <tr><td>&lt;hr&gt;</td><td>Tematski razdjel</td><td>&lt;hr&gt;</td></tr>
+    <tr><td>&lt;a&gt;</td><td>Link</td><td>&lt;a href="url"&gt;Klikni&lt;/a&gt;</td></tr>
+    <tr><td>&lt;bdi&gt;</td><td>Izolacija bidi teksta</td><td>&lt;bdi&gt;اسم&lt;/bdi&gt;</td></tr>
+    <tr><td>&lt;bdo&gt;</td><td>Override smjera</td><td>&lt;bdo dir="rtl"&gt;obrnuto&lt;/bdo&gt;</td></tr>
+    <tr><td>&lt;wbr&gt;</td><td>Hint za word break</td><td>dugačka&lt;wbr&gt;Riječ</td></tr>
+  </table>
+
+  <h2 class="group-title">CSS Font Svojstva</h2>
+  <table class="cheat-table">
+    <tr><th>Svojstvo</th><th>Vrijednosti</th><th>Primjer</th></tr>
+    <tr><td style="color:var(--tag-css)">font-family</td><td>Naziv fonta, fallback lista</td><td>font-family: 'Inter', sans-serif</td></tr>
+    <tr><td style="color:var(--tag-css)">font-size</td><td>px, rem, em, %, vw</td><td>font-size: 1rem</td></tr>
+    <tr><td style="color:var(--tag-css)">font-weight</td><td>100–900, bold, normal</td><td>font-weight: 700</td></tr>
+    <tr><td style="color:var(--tag-css)">font-style</td><td>normal, italic, oblique</td><td>font-style: italic</td></tr>
+    <tr><td style="color:var(--tag-css)">font-variant</td><td>normal, small-caps</td><td>font-variant: small-caps</td></tr>
+    <tr><td style="color:var(--tag-css)">font-kerning</td><td>auto, normal, none</td><td>font-kerning: normal</td></tr>
+    <tr><td style="color:var(--tag-css)">font-stretch</td><td>condensed, normal, expanded</td><td>font-stretch: condensed</td></tr>
+    <tr><td style="color:var(--tag-css)">font-synthesis</td><td>none, weight, style</td><td>font-synthesis: none</td></tr>
+    <tr><td style="color:var(--tag-css)">font-optical-sizing</td><td>auto, none</td><td>font-optical-sizing: auto</td></tr>
+    <tr><td style="color:var(--tag-css)">font-variation-settings</td><td>"axis" value parovi</td><td>font-variation-settings: "wght" 650</td></tr>
+  </table>
+
+  <h2 class="group-title">CSS Text Svojstva</h2>
+  <table class="cheat-table">
+    <tr><th>Svojstvo</th><th>Vrijednosti</th><th>Primjer</th></tr>
+    <tr><td style="color:var(--tag-css)">text-align</td><td>left, center, right, justify</td><td>text-align: center</td></tr>
+    <tr><td style="color:var(--tag-css)">text-decoration</td><td>none, underline, overline, line-through</td><td>text-decoration: underline</td></tr>
+    <tr><td style="color:var(--tag-css)">text-decoration-style</td><td>solid, dashed, dotted, wavy, double</td><td>text-decoration-style: wavy</td></tr>
+    <tr><td style="color:var(--tag-css)">text-decoration-color</td><td>color vrijednost</td><td>text-decoration-color: red</td></tr>
+    <tr><td style="color:var(--tag-css)">text-transform</td><td>none, uppercase, lowercase, capitalize</td><td>text-transform: uppercase</td></tr>
+    <tr><td style="color:var(--tag-css)">text-shadow</td><td>x y blur color</td><td>text-shadow: 2px 2px 4px black</td></tr>
+    <tr><td style="color:var(--tag-css)">text-indent</td><td>dužina (px, em)</td><td>text-indent: 2em</td></tr>
+    <tr><td style="color:var(--tag-css)">text-overflow</td><td>clip, ellipsis</td><td>text-overflow: ellipsis</td></tr>
+    <tr><td style="color:var(--tag-css)">letter-spacing</td><td>px, em</td><td>letter-spacing: 2px</td></tr>
+    <tr><td style="color:var(--tag-css)">word-spacing</td><td>px, em</td><td>word-spacing: 5px</td></tr>
+    <tr><td style="color:var(--tag-css)">line-height</td><td>broj, px, em, %</td><td>line-height: 1.6</td></tr>
+    <tr><td style="color:var(--tag-css)">white-space</td><td>normal, nowrap, pre, pre-wrap</td><td>white-space: nowrap</td></tr>
+    <tr><td style="color:var(--tag-css)">word-break</td><td>normal, break-all, keep-all</td><td>word-break: break-all</td></tr>
+    <tr><td style="color:var(--tag-css)">hyphens</td><td>none, manual, auto</td><td>hyphens: auto</td></tr>
+    <tr><td style="color:var(--tag-css)">direction</td><td>ltr, rtl</td><td>direction: rtl</td></tr>
+    <tr><td style="color:var(--tag-css)">writing-mode</td><td>horizontal-tb, vertical-rl, vertical-lr</td><td>writing-mode: vertical-rl</td></tr>
+    <tr><td style="color:var(--tag-css)">unicode-bidi</td><td>normal, embed, isolate, bidi-override</td><td>unicode-bidi: embed</td></tr>
+    <tr><td style="color:var(--tag-css)">color</td><td>ime, hex, rgb, hsl</td><td>color: #e2e8f0</td></tr>
+    <tr><td style="color:var(--tag-css)">visibility</td><td>visible, hidden, collapse</td><td>visibility: hidden</td></tr>
+  </table>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 7: KVIZ
+══════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-kviz">
+<div class="container">
+
+  <p class="section-label">Provjeri znanje</p>
+  <div id="kviz-container"></div>
+  <div id="kviz-score" class="quiz-score" style="display:none"></div>
+  <button id="kviz-restart" onclick="startKviz()" style="display:none;background:var(--accent);border:none;color:#fff;padding:0.7rem 1.5rem;border-radius:8px;font-size:0.9rem;cursor:pointer;font-family:inherit;margin-top:1rem">🔄 Pokreni ponovno</button>
+
+</div>
+</div>
+
+<script>
+// ── TABS ──
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── FONT DEMO ──
+function updateFontDemo() {
+  const el = document.getElementById('font-demo');
+  const ff = document.getElementById('ff').value;
+  const fs = document.getElementById('fs').value;
+  const fw = document.getElementById('fw').value;
+  const fst = document.getElementById('fst').value;
+  const fv = document.getElementById('fv').value;
+  const fc = document.getElementById('fc').value;
+  document.getElementById('fs-val').textContent = fs + 'px';
+  el.style.fontFamily = ff;
+  el.style.fontSize = fs + 'px';
+  el.style.fontWeight = fw;
+  el.style.fontStyle = fst;
+  el.style.fontVariant = fv;
+  el.style.color = fc;
+  document.getElementById('font-live-css').textContent =
+    `font-family: ${ff};\nfont-size: ${fs}px;\nfont-weight: ${fw};\nfont-style: ${fst};\nfont-variant: ${fv};\ncolor: ${fc};`;
+}
+
+// ── TEXT DEMO ──
+function updateTextDemo() {
+  const el = document.getElementById('text-demo');
+  const ta = document.getElementById('ta').value;
+  const tt = document.getElementById('tt').value;
+  const td = document.getElementById('td').value;
+  const ls = document.getElementById('ls').value;
+  const lh = document.getElementById('lh').value;
+  const ts = document.getElementById('ts').value;
+  document.getElementById('ls-val').textContent = ls + 'px';
+  document.getElementById('lh-val').textContent = lh;
+  el.style.textAlign = ta;
+  el.style.textTransform = tt;
+  el.style.textDecoration = td;
+  el.style.letterSpacing = ls + 'px';
+  el.style.lineHeight = lh;
+  el.style.textShadow = ts;
+  document.getElementById('text-live-css').textContent =
+    `text-align: ${ta};\ntext-transform: ${tt};\ntext-decoration: ${td};\nletter-spacing: ${ls}px;\nline-height: ${lh};\ntext-shadow: ${ts};`;
+}
+
+// ── PLAYGROUND ──
+function runPlayground() {
+  const html = document.getElementById('pg-html').value;
+  const css = document.getElementById('pg-css').value;
+  const iframe = document.getElementById('pg-output');
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write(`<!DOCTYPE html><html><head><style>
+    body{background:#1a1f2e;color:#e2e8f0;font-family:sans-serif;padding:16px;margin:0}
+    ${css}
+  </style></head><body>${html}</body></html>`);
+  doc.close();
+}
+
+const snippets = {
+  headings: {
+    html: `<h1>Naslov h1</h1>\n<h2>Naslov h2</h2>\n<h3>Naslov h3</h3>\n<h4>Naslov h4</h4>\n<h5>Naslov h5</h5>\n<h6>Naslov h6</h6>`,
+    css: `h1,h2,h3,h4,h5,h6 { font-family: Georgia, serif; margin: 8px 0; }\nh1 { color: #7c6af7; }\nh2 { color: #56cfb2; }\nh3 { color: #f7c46a; }`
+  },
+  'text-deco': {
+    html: `<p class="a">underline wavy red</p>\n<p class="b">overline solid blue</p>\n<p class="c">line-through</p>\n<p class="d">text-shadow glow</p>`,
+    css: `.a { text-decoration: underline wavy red; }\n.b { text-decoration: overline solid #60a5fa; }\n.c { text-decoration: line-through 2px #f87171; }\n.d { text-shadow: 0 0 10px #7c6af7, 0 0 20px #7c6af7; font-size: 1.3rem; font-weight: bold; }`
+  },
+  bidi: {
+    html: `<p>LTR: Hello World</p>\n<p dir="rtl">RTL: مرحبا بالعالم</p>\n<p>Miješano: User <bdi>اسم</bdi> posted.</p>\n<p><bdo dir="rtl">Ovo je obrnuto</bdo></p>`,
+    css: `p { margin: 8px 0; font-size: 1.1rem; border-bottom: 1px solid #333; padding: 6px 0; }`
+  },
+  'code-block': {
+    html: `<p>Koristi <code>console.log()</code> za debug.</p>\n<p>Pritisni <kbd>Ctrl</kbd>+<kbd>S</kbd> za spremi.</p>\n<p>Greška: <samp>Error: File not found</samp></p>\n<p>Varijabla <var>x</var> = 42</p>\n<pre>function hello() {\n  return "world";\n}</pre>`,
+    css: `code, samp, var, kbd { font-family: monospace; }\ncode { background: #2a3348; padding: 2px 6px; border-radius: 4px; color: #a3e635; }\nkbd { background: #3a3a3a; padding: 2px 8px; border: 1px solid #666; border-radius: 3px; font-size: 0.9em; }\nsamp { color: #f87171; }\nvar { font-style: italic; color: #f7c46a; }\npre { background: #0a0d14; padding: 12px; border-radius: 6px; border: 1px solid #2a3348; margin-top: 10px; }`
+  },
+  semantic: {
+    html: `<p>Kratica: <abbr title="Cascading Style Sheets">CSS</abbr></p>\n<p>Definicija: <dfn>HTML</dfn> je markup jezik.</p>\n<p>Datum: <time datetime="2024-01-01">1. siječnja 2024.</time></p>\n<p>Traženo: <mark>označeno</mark> u tekstu.</p>\n<p>H<sub>2</sub>O i E=mc<sup>2</sup></p>`,
+    css: `p { margin: 8px 0; font-size: 1rem; }\nabbr { text-decoration: underline dotted; cursor: help; }\ndfn { font-style: italic; color: #56cfb2; }\nmark { background: #f7c46a; color: #000; padding: 0 4px; border-radius: 3px; }`
+  }
+};
+
+function loadSnippet(key) {
+  document.getElementById('pg-html').value = snippets[key].html;
+  document.getElementById('pg-css').value = snippets[key].css;
+  runPlayground();
+}
+
+// ── KVIZ ──
+const questions = [
+  { q: "Koji HTML element koristi se za semantički važan (bold) tekst?", opts: ["<b>", "<strong>", "<em>", "<bold>"], ans: 1, exp: "<strong> ima semantičko značenje 'važno', dok <b> je samo vizualno podebljanje." },
+  { q: "Koji CSS property mijenja razmak IZMEĐU SLOVA?", opts: ["word-spacing", "line-height", "letter-spacing", "font-kerning"], ans: 2, exp: "letter-spacing kontrolira razmak između pojedinih slova (tracking). word-spacing = razmak između riječi." },
+  { q: "Što radi <abbr title='...'>?", opts: ["Prikazuje tooltop s punim imenom kratice", "Čini tekst podebljano", "Dodaje link", "Mijenja font"], ans: 0, exp: "abbr označava kraticu, a title atribut prikazuje tooltip s punim imenom kada korisnik hovera." },
+  { q: "Koji element koristimo za prikaz tipkovničkih kratica (npr. Ctrl+S)?", opts: ["<code>", "<samp>", "<kbd>", "<var>"], ans: 2, exp: "<kbd> = keyboard input. <code> = kod, <samp> = output programa, <var> = varijabla." },
+  { q: "Što radi text-transform: capitalize?", opts: ["Sve u velika slova", "Sve u mala slova", "Prvo slovo svake riječi veliko", "Ništa"], ans: 2, exp: "capitalize = prvo slovo svake riječi. uppercase = SVE VELIKO. lowercase = sve malo." },
+  { q: "Koji CSS property kontrolira VISINU RETKA?", opts: ["font-size", "line-height", "height", "word-spacing"], ans: 1, exp: "line-height definira visinu retka teksta. Preporučena vrijednost za čitljivost je 1.4 – 1.8." },
+  { q: "Koji smjer teksta postavlja direction: rtl?", opts: ["gore prema dolje", "lijevo prema desno", "desno prema lijevo", "dijagonalno"], ans: 2, exp: "rtl = Right To Left. Koristi se za arapski, hebrejski, perzijski i ostale RTL jezike." },
+  { q: "Koji HTML element prikazuje tekst kao izlaz (output) računalnog programa?", opts: ["<code>", "<kbd>", "<var>", "<samp>"], ans: 3, exp: "<samp> = sample output (izlaz programa). <code> = kod, <kbd> = tipkovnički unos, <var> = varijabla." },
+  { q: "Što radi text-overflow: ellipsis?", opts: ["Briše predugi tekst", "Dodaje ... kad tekst prekorači kontejner", "Prelama tekst u novi red", "Smanjuje font"], ans: 1, exp: "ellipsis dodaje '...' na kraju teksta koji ne stane. Treba i overflow:hidden i white-space:nowrap." },
+  { q: "Koji tag koristimo za VERTIKALNI smjer teksta (japanski stil)?", opts: ["direction: vertical", "writing-mode: vertical-rl", "text-orientation: upright", "unicode-bidi: vertical"], ans: 1, exp: "writing-mode: vertical-rl rotira tok teksta vertikalno, s desna na lijevo po stupcima." },
+  { q: "Koja je razlika između <em> i <i>?", opts: ["Nema razlike", "<em> = naglasak (semantika), <i> = vizualna kurziva", "<i> = naglasak, <em> = vizualna", "<em> je za css"], ans: 1, exp: "<em> označava naglasak — važno za screen readere. <i> je samo vizualni stil bez semantike." },
+  { q: "Koji property kontrolira font-face varijabilnih fontova?", opts: ["font-variant-settings", "font-variation-settings", "font-variable", "font-axis"], ans: 1, exp: "font-variation-settings: 'wght' 650 — kontrolira osi varijabilnih fontova (težina, širina, nagib...)." },
+];
+
+let currentQ = 0, score = 0, answered = [];
+
+function startKviz() {
+  currentQ = 0; score = 0; answered = new Array(questions.length).fill(false);
+  document.getElementById('kviz-score').style.display = 'none';
+  document.getElementById('kviz-restart').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const container = document.getElementById('kviz-container');
+  if (currentQ >= questions.length) {
+    container.innerHTML = '';
+    const sc = document.getElementById('kviz-score');
+    const pct = Math.round(score / questions.length * 100);
+    sc.style.display = 'block';
+    sc.style.background = pct >= 70 ? '#0d3328' : '#2d1212';
+    sc.style.color = pct >= 70 ? '#56cfb2' : '#f87171';
+    sc.innerHTML = `${pct >= 70 ? '🎉' : '📚'} Rezultat: ${score}/${questions.length} (${pct}%)<br><small style="font-weight:400;font-size:0.8rem">${pct>=80?'Odlično!':pct>=60?'Dobro, ponovi još jednom!':'Vrati se na kartice i ponovi gradivo.'}</small>`;
+    document.getElementById('kviz-restart').style.display = 'inline-block';
+    return;
+  }
+  const q = questions[currentQ];
+  container.innerHTML = `
+    <div style="color:var(--text-dim);font-size:0.8rem;margin-bottom:0.8rem">Pitanje ${currentQ+1} od ${questions.length}</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${(currentQ/questions.length)*100}%"></div></div>
+    <div class="quiz-box">
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-fb" id="qfb"></div>
+    </div>`;
+}
+
+function answerQ(idx) {
+  if (answered[currentQ]) return;
+  answered[currentQ] = true;
+  const q = questions[currentQ];
+  const opts = document.querySelectorAll('.quiz-opt');
+  const fb = document.getElementById('qfb');
+  opts[q.ans].classList.add('correct');
+  if (idx === q.ans) {
+    score++;
+    fb.textContent = '✓ Točno! ' + q.exp;
+    fb.className = 'quiz-fb ok show';
+  } else {
+    opts[idx].classList.add('wrong');
+    fb.textContent = '✗ Netočno. ' + q.exp;
+    fb.className = 'quiz-fb fail show';
+  }
+  setTimeout(() => { currentQ++; renderQuestion(); }, 2200);
+}
+
+// init
+runPlayground();
+startKviz();
+</script>
+</body>
+</html>
